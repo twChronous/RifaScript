@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let vendedores = [
         { nome: "Luis Eduardo Lima", rifas: 0 },
         { nome: "Matheus Rodrigues", rifas: 0 },
+        { nome: "Matheus Rodrigues", rifas: 0 },
+        //{ nome: "Nome do Meliante", rifas: 0 },
         { nome: "Matheus Farias", rifas: 0 }
     ];
 
@@ -9,8 +11,12 @@ document.addEventListener("DOMContentLoaded", function() {
     let rftable = document.createElement("table");
     let rftableHead = rftable.createTHead();
     let linerftableHead = rftableHead.insertRow();
-    linerftableHead.insertCell().textContent = "Vendedor";
-    linerftableHead.insertCell().textContent = "Rifas Vendidas";
+    let th1 = document.createElement("th");
+    let th2 = document.createElement("th");
+    th1.textContent = "Vendedor";
+    th2.textContent = "Rifas Vendidas";
+    linerftableHead.appendChild(th1);
+    linerftableHead.appendChild(th2);
     let rftableBody = rftable.createTBody(); 
     vendedores.forEach(vendedor => {
         let line = rftableBody.insertRow();
@@ -32,13 +38,16 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
     let compradores = [];
-    let cmpCount = 0;
+    let cmpCount = 1;
     let divcmpTable = document.getElementById("cmpTable");
-    let cmpTable = document.createElement("table");
+    let cmpTable = document.getElementById("idTable");
+    //let cmpTable = document.createElement("table");
+/*
     let cmpHead = cmpTable.createTHead();
     let linecmpHead = cmpHead.insertRow();
     linecmpHead.insertCell().textContent = "ID";
     linecmpHead.insertCell().textContent = "Nome";
+*/
     let cmpTableBody = cmpTable.createTBody();
     divcmpTable.appendChild(cmpTable);
 

@@ -8,17 +8,27 @@
     </head>
     <body>
       <h1>Rifas da Edra</h1>
-      <h3>Tabela de Vendedores</h3>
-      <button id="tableButton">Mostrar Tabela</button>
-      <div id="rifasTable"></div>
       <h3>Coloque suas informaceos para Comprar uma rifa</h3>
-      <input type="text" id="nomeInput" placeHolder="Digite seu Nome" required>
-      <input type="email" id="emailInput" placeHolder="Digite seu Email" required>
-      <input type="tel" id="numeroInput" placeHolder="Digite seu numero de Telefone" required>
-      <input type="number" id="rifasInput" placeHolder="Quantas rifas quer comprar?" required>
+      <div id="Inputs">
+        <input type="text" id="nomeInput" placeHolder="Digite seu Nome" required>
+        <input type="email" id="emailInput" placeHolder="Digite seu Email" required>
+        <input type="tel" id="numeroInput" placeHolder="Digite seu numero de Telefone" required>
+        <input type="number" id="rifasInput" placeHolder="Quantas rifas quer comprar?" required>
+      </div>
       <button onclick="cadastrar()">Adicionar Comprador</button>
+      <h3>Tabela de Vendedores</h3>
+      <button id="tableButton">Esconder Tabela</button>
+      <div id="rifasTable"></div>
       <h3>Tabela de Compradores</h3>
-      <div id="cmpTable"></div>
+      <div id="cmpTable">
+      <table id="idTable">
+        <tr>
+          <th>Numero</th>
+          <th>Nome</th>
+        </tr>
+      </table>   
+      </div>
+
       <script src="script.js"></script>
     </body>
 </html>
