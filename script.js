@@ -43,19 +43,21 @@ document.addEventListener("DOMContentLoaded", function() {
     divcmpTable.appendChild(cmpTable);
 
 function cadastrar() {
-    let quant = document.getElementById("rifasInput").value;
     let nomeIN = document.getElementById("nomeInput").value;
     let emailIN = document.getElementById("emailInput").value;
     let numeroIN = document.getElementById("numeroInput").value;
-
+    let quant = document.getElementById("rifasInput").value;
+  
     let comprador = { nome: nomeIN, email: emailIN, numero: numeroIN };
-    compradores.push(comprador);
-    localStorage.setItem('compradores', JSON.stringify(compradores));
-
-    let cmpTableBody = document.querySelector("#cmpTable table tbody");
-    let line = cmpTableBody.insertRow();
-    line.insertCell().textContent = cmpCount++;
-    line.insertCell().textContent = comprador.nome;
+    for(let i=0; i<quant; i++){
+      compradores.push(comprador);
+      console.log(quant);
+      localStorage.setItem('compradores', JSON.stringify(compradores));
+      let cmpTableBody = document.querySelector("#cmpTable table tbody");
+      let line = cmpTableBody.insertRow();
+      line.insertCell().textContent = cmpCount++;
+      line.insertCell().textContent = comprador.nome;
+    }
 
     console.log("Cadastrando Usuários");
 
