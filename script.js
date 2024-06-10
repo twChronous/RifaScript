@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() { 
+    
+    
     let vendedores = [
         { nome: "Luis Eduardo Lima", rifas: 0 },
         { nome: "Matheus Rodrigues", rifas: 0 },
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     divrfTable.appendChild(rftable);
 
+
     let hideButton = document.getElementById("tableButton");
     hideButton.addEventListener("click", () => { 
         if (divrfTable.style.display === "none") {
@@ -35,21 +37,28 @@ document.addEventListener("DOMContentLoaded", function() {
             hideButton.textContent = "Mostrar Tabela";
         }
     });
-});
 
     let compradores = [];
     let cmpCount = 1;
     let divcmpTable = document.getElementById("cmpTable");
     let cmpTable = document.getElementById("idTable");
-    //let cmpTable = document.createElement("table");
-/*
-    let cmpHead = cmpTable.createTHead();
-    let linecmpHead = cmpHead.insertRow();
-    linecmpHead.insertCell().textContent = "ID";
-    linecmpHead.insertCell().textContent = "Nome";
-*/
     let cmpTableBody = cmpTable.createTBody();
     divcmpTable.appendChild(cmpTable);
+
+
+
+let select = document.getElementById("selectVendedor");
+for(let i = 0; i < vendedores.length; i++) {
+    let opt = vendedores[i];
+    let el = document.createElement("option");
+    el.textContent = opt.nome;
+    el.value = opt.rifas;
+    select.appendChild(el);
+    let quant = document.getElementById("rifasInput").value;
+    console.log(quant);
+    vendedores[i].rifas += quant;
+
+}
 
 function cadastrar() {
     let nomeIN = document.getElementById("nomeInput").value;
@@ -66,6 +75,7 @@ function cadastrar() {
       let line = cmpTableBody.insertRow();
       line.insertCell().textContent = cmpCount++;
       line.insertCell().textContent = comprador.nome;
+              
     }
 
     console.log("Cadastrando Usuários");

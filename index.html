@@ -15,9 +15,14 @@
         <input type="tel" id="numeroInput" placeHolder="Digite seu numero de Telefone" required>
         <input type="number" id="rifasInput" placeHolder="Quantas rifas quer comprar?" required>
       </div>
-      <button onclick="cadastrar()">Adicionar Comprador</button>
+      <select id="selectVendedor"> 
+        <option>Choose a number</option> 
+      </select>
+      <div> 
+        <button onclick="cadastrar()">Adicionar Comprador</button>
+      </div>
       <h3>Tabela de Vendedores</h3>
-      <button id="tableButton">Esconder Tabela</button>
+      <button id="tableButton" >Esconder Tabela</button>
       <div id="rifasTable"></div>
       <h3>Tabela de Compradores</h3>
       <div id="cmpTable">

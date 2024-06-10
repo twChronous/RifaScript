@@ -18,12 +18,27 @@ h2 {
 input[type="text"],
 input[type="email"],
 input[type="tel"],
-input[type="number"] {
+input[type="number"] 
+{
     width: 80%;
     padding: 10px;
     margin: 10px 0;
     box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
+
+option {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
 
 button {
     background-color: green;
