@@ -1,10 +1,7 @@
-    
-    
+document.addEventListener("DOMContentLoaded", function() {
     let vendedores = [
         { nome: "Luis Eduardo Lima", rifas: 0 },
         { nome: "Matheus Rodrigues", rifas: 0 },
-        { nome: "Matheus Rodrigues", rifas: 0 },
-        //{ nome: "Nome do Meliante", rifas: 0 },
         { nome: "Matheus Farias", rifas: 0 }
     ];
 
@@ -18,17 +15,22 @@
     th2.textContent = "Rifas Vendidas";
     linerftableHead.appendChild(th1);
     linerftableHead.appendChild(th2);
-    let rftableBody = rftable.createTBody(); 
-    vendedores.forEach(vendedor => {
-        let line = rftableBody.insertRow();
-        line.insertCell().textContent = vendedor.nome;
-        line.insertCell().textContent = vendedor.rifas;
-    });
+    let rftableBody = rftable.createTBody();
     divrfTable.appendChild(rftable);
 
+    function updateVendedoresTable() {
+        rftableBody.innerHTML = "";
+        vendedores.forEach(vendedor => {
+            let line = rftableBody.insertRow();
+            line.insertCell().textContent = vendedor.nome;
+            line.insertCell().textContent = vendedor.rifas;
+        });
+    }
+
+    updateVendedoresTable();
 
     let hideButton = document.getElementById("tableButton");
-    hideButton.addEventListener("click", () => { 
+    hideButton.addEventListener("click", () => {
         if (divrfTable.style.display === "none") {
             divrfTable.style.display = "block";
             hideButton.textContent = "Esconder Tabela";
@@ -41,48 +43,61 @@
     let compradores = [];
     let cmpCount = 1;
     let divcmpTable = document.getElementById("cmpTable");
-    let cmpTable = document.getElementById("idTable");
+    let cmpTable = document.createElement("table");
+    let cmpHead = cmpTable.createTHead();
+    let linecmpHead = cmpHead.insertRow();
+    let th3 = document.createElement("th");
+    let th4 = document.createElement("th");
+    th3.textContent = "ID";
+    th4.textContent = "Nome";
+    linecmpHead.appendChild(th3);
+    linecmpHead.appendChild(th4);
     let cmpTableBody = cmpTable.createTBody();
     divcmpTable.appendChild(cmpTable);
 
-
-
-let select = document.getElementById("selectVendedor");
-for(let i = 0; i < vendedores.length; i++) {
-    let opt = vendedores[i];
-    let el = document.createElement("option");
-    el.textContent = opt.nome;
-    el.value = opt.rifas;
-    select.appendChild(el);
-    let quant = document.getElementById("rifasInput").value;
-    console.log(quant);
-    vendedores[i].rifas += quant;
-
-}
-
-function cadastrar() {
-    let nomeIN = document.getElementById("nomeInput").value;
-    let emailIN = document.getElementById("emailInput").value;
-    let numeroIN = document.getElementById("numeroInput").value;
-    let quant = document.getElementById("rifasInput").value;
-  
-    let comprador = { nome: nomeIN, email: emailIN, numero: numeroIN };
-    for(let i=0; i<quant; i++){
-      compradores.push(comprador);
-      console.log(quant);
-      localStorage.setItem('compradores', JSON.stringify(compradores));
-      let cmpTableBody = document.querySelector("#cmpTable table tbody");
-      let line = cmpTableBody.insertRow();
-      line.insertCell().textContent = cmpCount++;
-      line.insertCell().textContent = comprador.nome;
-              
+    function printVendedores(vendedores) {
+        vendedores.forEach(vendedor => {
+            console.log(`Nome: ${vendedor.nome}, Rifas: ${vendedor.rifas}`);
+        });
     }
 
-    console.log("Cadastrando Usuários");
+    let select = document.getElementById("selectVendedor");
+    vendedores.forEach(vendedor => {
+        let option = document.createElement("option");
+        option.textContent = vendedor.nome;
+        option.value = vendedor.nome;
+        select.appendChild(option);
+    });
 
-    document.getElementById("nomeInput").value = "";
-    document.getElementById("emailInput").value = "";
-    document.getElementById("numeroInput").value = "";
-    document.getElementById("rifasInput").value = "";
-}
+    window.cadastrar = function() {
+        let nomeIN = document.getElementById("nomeInput").value;
+        let emailIN = document.getElementById("emailInput").value;
+        let numeroIN = document.getElementById("numeroInput").value;
+        let quant = parseInt(document.getElementById("rifasInput").value);
+        let selectedVendedor = document.getElementById("selectVendedor").value;
+
+        let comprador = { nome: nomeIN, email: emailIN, numero: numeroIN };
+        compradores.push(comprador);
+        localStorage.setItem('compradores', JSON.stringify(compradores));
+
+        for (let i = 0; i < vendedores.length; i++) {
+            if (vendedores[i].nome === selectedVendedor) {
+                vendedores[i].rifas += quant;
+                break;
+            }
+        }
+
+        let line = cmpTableBody.insertRow();
+        line.insertCell().textContent = cmpCount++;
+        line.insertCell().textContent = comprador.nome;
+
+        updateVendedoresTable();
+        printVendedores(vendedores);
+
+        document.getElementById("nomeInput").value = "";
+        document.getElementById("emailInput").value = "";
+        document.getElementById("numeroInput").value = "";
+        document.getElementById("rifasInput").value = "";
+    };
+});
 
