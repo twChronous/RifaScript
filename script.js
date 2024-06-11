@@ -1,67 +1,56 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let vendedores = [
-        { nome: "Luis Eduardo Lima", rifas: 0 },
-        { nome: "Matheus Rodrigues", rifas: 0 },
-        { nome: "Matheus Farias", rifas: 0 }
-    ];
+const vendedores = [
+    { nome: "Luis Eduardo Lima", rifas: 0 },
+    { nome: "Matheus Rodrigues", rifas: 0 },
+    { nome: "Matheus Farias", rifas: 0 }
+];
 
-    let divrfTable = document.getElementById("rifasTable");
-    let rftable = document.createElement("table");
-    let rftableHead = rftable.createTHead();
-    let linerftableHead = rftableHead.insertRow();
-    let th1 = document.createElement("th");
-    let th2 = document.createElement("th");
-    th1.textContent = "Vendedor";
-    th2.textContent = "Rifas Vendidas";
-    linerftableHead.appendChild(th1);
-    linerftableHead.appendChild(th2);
-    let rftableBody = rftable.createTBody();
+document.addEventListener("DOMContentLoaded", () => {
+    const divrfTable = document.getElementById("rifasTable");
+    const rftable = document.createElement("table");
+    const rftableHead = rftable.createTHead().insertRow();
+    ["Vendedor", "Rifas Vendidas"].forEach(text => {
+        let th = document.createElement("th");
+        th.textContent = text;
+        rftableHead.appendChild(th);
+    });
+    const rftableBody = rftable.createTBody();
     divrfTable.appendChild(rftable);
 
-    function updateVendedoresTable() {
+    const updateVendedoresTable = () => {
         rftableBody.innerHTML = "";
         vendedores.forEach(vendedor => {
-            let line = rftableBody.insertRow();
+            const line = rftableBody.insertRow();
             line.insertCell().textContent = vendedor.nome;
             line.insertCell().textContent = vendedor.rifas;
         });
-    }
+    };
 
     updateVendedoresTable();
 
-    let hideButton = document.getElementById("tableButton");
+    const hideButton = document.getElementById("tableButton");
     hideButton.addEventListener("click", () => {
-        if (divrfTable.style.display === "none") {
-            divrfTable.style.display = "block";
-            hideButton.textContent = "Esconder Tabela";
-        } else {
-            divrfTable.style.display = "none";
-            hideButton.textContent = "Mostrar Tabela";
-        }
+        divrfTable.style.display = divrfTable.style.display === "none" ? "block" : "none";
+        hideButton.textContent = divrfTable.style.display === "none" ? "Mostrar Tabela" : "Esconder Tabela";
     });
 
-    let compradores = [];
+    const compradores = [];
     let cmpCount = 1;
-    let divcmpTable = document.getElementById("cmpTable");
-    let cmpTable = document.createElement("table");
-    let cmpHead = cmpTable.createTHead();
-    let linecmpHead = cmpHead.insertRow();
-    let th3 = document.createElement("th");
-    let th4 = document.createElement("th");
-    th3.textContent = "ID";
-    th4.textContent = "Nome";
-    linecmpHead.appendChild(th3);
-    linecmpHead.appendChild(th4);
-    let cmpTableBody = cmpTable.createTBody();
+    const divcmpTable = document.getElementById("cmpTable");
+    const cmpTable = document.createElement("table");
+    const cmpHead = cmpTable.createTHead().insertRow();
+    ["ID", "Nome"].forEach(text => {
+        let th = document.createElement("th");
+        th.textContent = text;
+        cmpHead.appendChild(th);
+    });
+    const cmpTableBody = cmpTable.createTBody();
     divcmpTable.appendChild(cmpTable);
 
-    function printVendedores(vendedores) {
-        vendedores.forEach(vendedor => {
-            console.log(`Nome: ${vendedor.nome}, Rifas: ${vendedor.rifas}`);
-        });
-    }
+    const printVendedores = vendedores => {
+        vendedores.forEach(vendedor => console.log(`Nome: ${vendedor.nome}, Rifas: ${vendedor.rifas}`));
+    };
 
-    let select = document.getElementById("selectVendedor");
+    const select = document.getElementById("selectVendedor");
     vendedores.forEach(vendedor => {
         let option = document.createElement("option");
         option.textContent = vendedor.nome;
@@ -69,35 +58,28 @@ document.addEventListener("DOMContentLoaded", function() {
         select.appendChild(option);
     });
 
-    window.cadastrar = function() {
-        let nomeIN = document.getElementById("nomeInput").value;
-        let emailIN = document.getElementById("emailInput").value;
-        let numeroIN = document.getElementById("numeroInput").value;
-        let quant = parseInt(document.getElementById("rifasInput").value);
-        let selectedVendedor = document.getElementById("selectVendedor").value;
+    window.cadastrar = () => {
+        const comprador = {
+            nome: document.getElementById("nomeInput").value,
+            email: document.getElementById("emailInput").value,
+            numero: document.getElementById("numeroInput").value
+        };
+        const quant = parseInt(document.getElementById("rifasInput").value);
+        const selectedVendedor = document.getElementById("selectVendedor").value;
 
-        let comprador = { nome: nomeIN, email: emailIN, numero: numeroIN };
         compradores.push(comprador);
         localStorage.setItem('compradores', JSON.stringify(compradores));
 
-        for (let i = 0; i < vendedores.length; i++) {
-            if (vendedores[i].nome === selectedVendedor) {
-                vendedores[i].rifas += quant;
-                break;
-            }
-        }
+        const vendedor = vendedores.find(v => v.nome === selectedVendedor);
+        if (vendedor) vendedor.rifas += quant;
 
-        let line = cmpTableBody.insertRow();
+        const line = cmpTableBody.insertRow();
         line.insertCell().textContent = cmpCount++;
         line.insertCell().textContent = comprador.nome;
 
         updateVendedoresTable();
         printVendedores(vendedores);
 
-        document.getElementById("nomeInput").value = "";
-        document.getElementById("emailInput").value = "";
-        document.getElementById("numeroInput").value = "";
-        document.getElementById("rifasInput").value = "";
+        ["nomeInput", "emailInput", "numeroInput", "rifasInput"].forEach(id => document.getElementById(id).value = "");
     };
 });
-
