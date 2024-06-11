@@ -1,36 +1,55 @@
 :root {
     --blue: #2683B5;
-    --green: #008D35;
-    --purple: #414191;
     --gray: #393738;
+    --green: #008D35;
+    --white: #FFFFFF;
+    --purple: #414191;
 }
 body {
     background-color: white;
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+}
+header{
+    width: auto;
+    color: white;
+    margin: -1rem;
+    padding: .3rem;
+    text-align: center;
+    margin-top: -1.8rem;
+    background-color: var(--green);
+}
+.title {
+    color: var(--white);
+    font-size: 2.5rem;
+}
+.aling {
+    text-align: center;
+}
+.subtitle {
+    color: var(--gray);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 3rem 0;
 }
 
-h1 {
-   color: var(--green);
-   width: 80%;
-}
-
-
-h2 {
-   color: var(--green);
-}
-
-input {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
+.inputs {
+    width: 100%;
+    padding: 1rem;
+    text-align: center;         
+    border-radius: 5px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 5px;
     background-color: #f9f9f9;
 }
-
+.form {
+    text-align: center;
+}
+#selectVendedor {
+    margin: 1rem 0;
+}
+ .titles {
+    color: var(--gray);
+}
 option {
     width: 80%;
     padding: 10px;
@@ -40,7 +59,6 @@ option {
     border-radius: 5px;
     background-color: #f9f9f9;
 }
-
 
 button {
     background-color: var(--green);
@@ -57,9 +75,9 @@ button:hover {
 }
 
 table {
-    width: 80%;
-    border-collapse: collapse;
+    width: 100%;
     margin-top: 20px;
+    border-collapse: collapse;
 }
 
 table, th, td {

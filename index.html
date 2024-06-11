@@ -7,25 +7,39 @@
   <title>Rifas da Edra</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+    <header class="header">
+        <h1 class="title">Rifas da Edra</h1>
+    </header>
     <body>
-      <h1>Rifas da Edra</h1>
-      <h3>Coloque suas informaceos para Comprar uma rifa</h3>
-      <div id="Inputs">
-        <input type="text" id="nomeInput" placeHolder="Digite seu Nome" required>
-        <input type="email" id="emailInput" placeHolder="Digite seu Email" required>
-        <input type="tel" id="numeroInput" placeHolder="Digite seu numero de Telefone" required>
-        <input type="number" id="rifasInput" placeHolder="Quantas rifas quer comprar?" required>
-      </div>
-      <select id="selectVendedor" title="Escolha um vendedor"> 
+        <div class="aling">
+            <p class="subtitle">Coloque suas informacoes para comprar uma rifa</p>
+        </div>
+      <form class="form">
+        <p class="titles">Digite seu nome</p>
+        <input class="inputs" type="text" id="nomeInput" placeholder="ciclano de beltrano" required>
+        <p class="titles">Digite seu email</p>
+        <input class="inputs" type="email" id="emailInput" placeholder="seu@email.com" required>
+        <p class="titles">Digite seu numero de Telefone</p>
+        <input class="inputs" type="tel" id="numeroInput" placeholder="61 99999-9999" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" required>
+        <p class="titles">Quantas rifas quer comprar?</p>
+        <input class="inputs" type="number" id="rifasInput" value="0" required>
+    </form>    
+    <select class="inputs" id="selectVendedor" title="Escolha um vendedor"></select>
         
-      </select>
-      <div> 
+      <div class="aling"> 
         <button onclick="cadastrar()">Adicionar Comprador</button>
       </div>
-      <h3>Tabela de Vendedores</h3>
-      <button id="tableButton" type="button">Esconder Tabela</button>
+
+    <div class="aling">
+            <p class="subtitle">Tabela de Vendedores</p>
+    </div>
+    <div class="aling">
+        <button id="tableButton" type="button">Esconder Tabela</button>
+    </div>
       <div id="rifasTable"></div>
-      <h3>Tabela de Compradores</h3>
+      <div class="aling">
+        <p class="subtitle">Tabela de Compradores</p>
+      </div>
       <div id="cmpTable">
       <table id="idTable">
         <tr>
