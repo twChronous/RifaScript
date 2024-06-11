@@ -1,3 +1,9 @@
+:root {
+    --blue: #2683B5;
+    --green: #008D35;
+    --purple: #414191;
+    --gray: #393738;
+}
 body {
     background-color: white;
     font-family: Arial, sans-serif;
@@ -6,20 +12,16 @@ body {
 }
 
 h1 {
-   color: green;
+   color: var(--green);
    width: 80%;
 }
 
 
 h2 {
-   color: green;
+   color: var(--green);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"] 
-{
+input {
     width: 80%;
     padding: 10px;
     margin: 10px 0;
@@ -41,7 +43,7 @@ option {
 
 
 button {
-    background-color: green;
+    background-color: var(--green);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -70,7 +72,7 @@ th, td {
 }
 
 table th {
-    background-color: green;
+    background-color: var(--green);
     color: white;
 }
 
