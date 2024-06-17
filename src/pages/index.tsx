@@ -5,7 +5,9 @@ import Tables from "./components/Tables";
 import Button from "@/pages/components/Button";
 import Inputs from "@/pages/components/inputs";
 import { GET_SELLERS } from './_api/queries';
-import { CREATE_BUYERS, PUBLISH_BUYER  } from './_api/mutations';
+import { CREATE_BUYERS, PUBLISH_BUYER, UPDATE_SELLER, PUBLISH_SELLER } from './_api/mutations';
+import { getSellerByID } from './_utils/getSellerByID';
+
 
 interface Seller {
     id: string;
@@ -14,19 +16,21 @@ interface Seller {
 }
 
 export default function Home() {
+    const [sellerId, setSellerId] = useState<string>();
+    const [sellers, setSellers] = useState<Seller[]>([]);
     const [buyerName, setBuyerName] = useState<string>();
     const [buyerEmail, setBuyerEmail] = useState<string>();
     const [buyerPhone, setBuyerPhone] = useState<number>();
-    const [sellerId, setSellerId] = useState<string>();
-    const [quantityOfSlots, setQuantityOfSlots] = useState<number>(0);
     const [slotValues, setSlotValues] = useState<number[]>([]);
+    const [quantityOfSlots, setQuantityOfSlots] = useState<number>(0);
+    
     const { loading: sellersLoading, error: sellersError, data: sellersData } = useQuery(GET_SELLERS);
-    const [sellers, setSellers] = useState<Seller[]>([]);
-
     const [mutateFunction, { data: mutateData, loading: mutateLoading, error: mutateError }] = useMutation(CREATE_BUYERS);
     const [publishFunction, { data: publishData, loading: publishLoading, error: publishError }] = useMutation(PUBLISH_BUYER);
+    const [updateFunction, { data: updateData, loading: updateLoading, error: updateError }] = useMutation(UPDATE_SELLER);
+    const [publishSellerFunction, { data: publishSellerData, loading: publishSellerLoading, error: publishSellerError }] = useMutation(PUBLISH_SELLER);
 
-   const handleSubmit = async () => {
+    const handleSubmit = async () => {
         try {
             const response = await mutateFunction({
                 variables: {
@@ -34,7 +38,7 @@ export default function Home() {
                     name: buyerName,
                     email: buyerEmail,
                     slots: slotValues,
-                    cellphone: Number(buyerPhone),
+                    cellphone: Number(buyerPhone)
                 }
             });
 
@@ -45,18 +49,37 @@ export default function Home() {
                     id: buyerId
                 }
             });
-
+            await handleUpdateSeller();
             console.log('Buyer published:', publishResponse);
+
             if (confirm(`Dados Salvos com sucesso! \n ID: ${publishResponse.data.publishBuyer.id} \n por favor aperte OK`) == true) {
                 window.location.reload()
-                // setBuyerEmail('');
-                // setBuyerName('');
-                // setBuyerPhone(undefined);
-                // setQuantityOfSlots(0);
               } 
         } catch (error) {
             console.error('Error:', error);
             alert(`Ocorreu um erro! \n ${error}`);
+        }
+    };
+    const handleUpdateSeller = async () => {
+        try {
+          const oldQuantity = await getSellerByID(sellerId)
+          console.log(oldQuantity);
+          const updateResponse = await updateFunction({
+            variables: {
+              id: sellerId,
+              quantitysold: oldQuantity + quantityOfSlots,
+            },
+          });
+          const publishSellerResponse = await publishSellerFunction({
+            variables: {
+                id: sellerId
+            }
+        });
+
+          console.log('Publish seller response:', publishSellerResponse);
+          console.log('Update response:', updateResponse);
+        } catch (error) {
+          console.error('Update error:', error);
         }
     };
 
@@ -101,7 +124,7 @@ export default function Home() {
                             <Inputs
                                 key={index}
                                 title={`Rifa ${index + 1}`}
-                                type="text"
+                                type="number"
                                 placeholder={`Digite o valor da rifa ${index + 1}`}
                                 onChange={(event: ChangeEvent<HTMLInputElement>) => handleSlotValueChange(index, event.target.value)}
                             />

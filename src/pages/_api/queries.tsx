@@ -16,3 +16,9 @@ export const GET_SELLERS = gql`
         quantitysold
     }
   }`;
+export const GET_SELLER_BY_ID = gql`
+    query GetSellersByID($id: ID) {
+        seller(where: {id: $id}) {
+            quantitysold
+    }
+}`;
