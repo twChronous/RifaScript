@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_BUYERS, GET_SELLERS } from '../_api/queries';
+
+React.useLayoutEffect = React.useEffect 
+
+import { GET_BUYERS, GET_SELLERS } from '@/_api/queries';
 
 interface ButtonProps {
     tableType: 'buyer' | 'seller';

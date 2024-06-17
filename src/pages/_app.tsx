@@ -1,8 +1,9 @@
+import dotenv from 'dotenv';
 import type { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
-import { client } from './_api/apollo';
-import dotenv from 'dotenv';
-import "./global/globals.css"
+
+import "@/global/globals.css"
+import { client } from '@/_api/apollo';
 
 function MyApp({ Component, pageProps }: AppProps) {
   dotenv.config();

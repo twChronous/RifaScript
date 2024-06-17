@@ -1,12 +1,12 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
-import Tables from "./components/Tables";
-import Button from "@/pages/components/Button";
-import Inputs from "@/pages/components/inputs";
-import { GET_SELLERS } from './_api/queries';
-import { CREATE_BUYERS, PUBLISH_BUYER, UPDATE_SELLER, PUBLISH_SELLER } from './_api/mutations';
-import { getSellerByID } from './_utils/getSellerByID';
+import Tables from "@/components/Tables";
+import Button from "@/components/Button";
+import Inputs from "@/components/inputs";
+import { GET_SELLERS } from '../_api/queries';
+import { CREATE_BUYERS, PUBLISH_BUYER, UPDATE_SELLER, PUBLISH_SELLER } from '@/_api/mutations';
+import { getSellerByID } from '@/_utils/getSellerByID';
 
 
 interface Seller {
