@@ -1,19 +1,15 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
+import { Seller } from "@/_utils/types";
+import Inputs from "@/components/inputs";
 import Tables from "@/components/Tables";
 import Button from "@/components/Button";
-import Inputs from "@/components/inputs";
 import { GET_SELLERS } from '../_api/queries';
-import { CREATE_BUYERS, PUBLISH_BUYER, UPDATE_SELLER, PUBLISH_SELLER } from '@/_api/mutations';
 import { getSellerByID } from '@/_utils/getSellerByID';
+import DropdownButton from '@/components/DropdownButton';
 
-
-interface Seller {
-    id: string;
-    name: string;
-    quantitysold: number;
-}
+import { CREATE_BUYERS, PUBLISH_BUYER, UPDATE_SELLER, PUBLISH_SELLER } from '@/_api/mutations';
 
 export default function Home() {
     const [sellerId, setSellerId] = useState<string>();
@@ -130,11 +126,8 @@ export default function Home() {
                             />
                         ))}
                     </div>
-                    <div className="mt-5 space-y-5">
-                        <p>Nome do vendedor</p>
-                        {sellers.map((seller) => (
-                            <Inputs key={seller.id} type="radio" placeholder={seller.name} onChange={() => setSellerId(seller.id)} />
-                        ))}
+                    <div className="mt-5 space-y-5 ">
+                        <DropdownButton text='Clique aqui para escolher seu vendedor' data={sellers} onSelect={(id: string) => console.log(id)}/>
                     </div>
                     <Button text="Salvar" onClick={handleSubmit} />
                 </div>

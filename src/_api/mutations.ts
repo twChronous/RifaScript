@@ -1,13 +1,5 @@
 import { gql } from '@apollo/client';
 
-export interface createBuyersInterface {
-    id: string;
-    name: string;
-    email: string;
-    quantity: number;
-    slotvalue: number;
-    cellphone: number;
-}
 export const CREATE_BUYERS = gql`
       mutation CreateBuyer($name: String!, $email: String!, $slots: [Int!]!, $cellphone: Int!, $id: ID) {
         createBuyer(

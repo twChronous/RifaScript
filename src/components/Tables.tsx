@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
-React.useLayoutEffect = React.useEffect 
-
+import { Seller, Buyer } from "@/_utils/types";
 import { GET_BUYERS, GET_SELLERS } from '@/_api/queries';
 
+React.useLayoutEffect = React.useEffect 
 interface ButtonProps {
     tableType: 'buyer' | 'seller';
 }
 
-interface Seller {
-    id: string;
-    name: string;
-    quantitysold: number;
-}
-
-interface Buyer {
-    name: string;
-    slots: number[];
-}
 
 export default function Tables(props: ButtonProps) {
     const [sellers, setSellers] = useState<Seller[]>([]);

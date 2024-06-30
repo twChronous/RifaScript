@@ -1,7 +1,4 @@
-interface ButtonProps {
-    text: string;
-    onClick?: () => void;
-}
+import { ButtonProps } from "@/_utils/types";
 
 export default function Button(props: ButtonProps) {
     return (
