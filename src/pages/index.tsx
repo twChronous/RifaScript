@@ -127,7 +127,7 @@ export default function Home() {
                         <Inputs title="Telefone do Comprador" type="number" isCellPhone={true} placeholder="(61) 9 9999-9999" onChange={(event: ChangeEvent<HTMLInputElement>) => setBuyerPhone(Number(event.target.value))} />
                     </div>
                     <div className="mt-5 space-y-5">
-                        <Inputs title="Quantidade de rifas" type="number" placeholder='00' onChange={(event: ChangeEvent<HTMLInputElement>) => setQuantityOfSlots(Number(event.target.value))} />
+                        <Inputs title="Quantidade de rifas" type="number" placeholder='00'  onChange={(event: ChangeEvent<HTMLInputElement>) => setQuantityOfSlots(Number(event.target.value))} />
                         {Array.from({ length: quantityOfSlots }).map((_, index) => (
                             <Inputs
                                 key={index}
