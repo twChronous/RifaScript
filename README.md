@@ -1,5 +1,5 @@
 # Rifascript
-Simple web application with vanilla JavaScript to centralize and organize the sale of raffles for the aerial robotics competition team at the University of Brasília.
+Simple web application made with JavaScript and Nextjs to centralize and organize the sale of raffles for the aerial robotics competition team at the University of Brasília.
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
