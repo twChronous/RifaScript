@@ -10,6 +10,7 @@ import { getSellerByID } from '@/_utils/getSellerByID';
 import DropdownButton from '@/components/DropdownButton';
 
 import { CREATE_BUYERS, PUBLISH_BUYER, UPDATE_SELLER, PUBLISH_SELLER } from '@/_api/mutations';
+import { GetSlots } from '@/_utils/slotvalid';
 
 export default function Home() {
     const [sellerId, setSellerId] = useState<string>();
@@ -26,8 +27,18 @@ export default function Home() {
     const [updateFunction, { data: updateData, loading: updateLoading, error: updateError }] = useMutation(UPDATE_SELLER);
     const [publishSellerFunction, { data: publishSellerData, loading: publishSellerLoading, error: publishSellerError }] = useMutation(PUBLISH_SELLER);
 
+    const checkSlotAvailability = GetSlots();
+
     const handleSubmit = async () => {
+        for (let slot of slotValues) {
+            if (!checkSlotAvailability(slot)) {
+                alert(`O numero ${slot} já foi selecionado! \nUse outro valor por favor.`);
+                return;
+            }
+        }
+
         try {
+            console.log(sellerId, buyerEmail, buyerName,slotValues, buyerPhone)
             const response = await mutateFunction({
                 variables: {
                     id: sellerId,
@@ -56,10 +67,10 @@ export default function Home() {
             alert(`Ocorreu um erro! \n ${error}`);
         }
     };
+
     const handleUpdateSeller = async () => {
         try {
           const oldQuantity = await getSellerByID(sellerId)
-          console.log(oldQuantity);
           const updateResponse = await updateFunction({
             variables: {
               id: sellerId,
@@ -86,6 +97,7 @@ export default function Home() {
     }, [sellersData, sellersLoading]);
 
     const handleSlotValueChange = (index: number, value: string) => {
+        
         const newSlotValues = [...slotValues];
         newSlotValues[index] = Number(value);
         setSlotValues(newSlotValues);
@@ -127,7 +139,7 @@ export default function Home() {
                         ))}
                     </div>
                     <div className="mt-5 space-y-5 ">
-                        <DropdownButton text='Clique aqui para escolher seu vendedor' data={sellers} onSelect={(id: string) => console.log(id)}/>
+                        <DropdownButton text='Clique aqui para escolher seu vendedor' data={sellers} onSelect={(id: string) => setSellerId(id)}/>
                     </div>
                     <Button text="Salvar" onClick={handleSubmit} />
                 </div>

@@ -22,3 +22,9 @@ export const GET_SELLER_BY_ID = gql`
             quantitysold
     }
 }`;
+export const GET_SLOTS = gql`
+    query GetSlots {
+        buyers {
+            slots
+        }
+}`;
